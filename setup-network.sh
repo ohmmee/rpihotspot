@@ -40,6 +40,7 @@ apCountryCode="$apCountryCodeDefault"
 apChannel="$apChannelDefault"
 apSsid=""
 apPassphrase=""
+ignore_broadcast_ssid=0
 apPasswordConfig=""
 
 # REFERENCE: Country codes taken from: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
@@ -219,6 +220,10 @@ for i in ${!options[@]}; do
 	
     if [ "$option" = "--install-upgrade" ]; then
         installUpgrade=true
+    fi
+
+    if [ "$option" = "--hide-ssid" ]; then
+        ignore_broadcast_ssid=1
     fi
     
     if [[ "$option" == --ap-ssid=* ]]; then
@@ -679,8 +684,6 @@ hw_mode=g
 macaddr_acl=0
 # Use WPA authentication
 auth_algs=1
-# Require clients to know the network name
-ignore_broadcast_ssid=0
 # Use WPA2
 wpa=2
 # Use a pre-shared key
